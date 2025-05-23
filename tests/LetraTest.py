@@ -1,5 +1,5 @@
 import pytest
-from Letra import Letra  # Asegúrate de que la ruta del import sea correcta
+from src.Letra import Letra  # Asegúrate de que la ruta del import sea correcta
 
 # Escenario 1: letra minúscula 'm'
 @pytest.fixture

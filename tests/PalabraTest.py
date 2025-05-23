@@ -1,6 +1,6 @@
 import pytest
-from Letra import Letra
-from Palabra import Palabra
+from src.Letra import Letra
+from src.Palabra import Palabra
 
 @pytest.fixture
 def escenario_palabra():

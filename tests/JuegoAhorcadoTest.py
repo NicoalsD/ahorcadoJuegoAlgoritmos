@@ -1,7 +1,7 @@
 import pytest
-from JuegoAhorcado import JuegoAhorcado, Estado
-from Letra import Letra
-from Palabra import Palabra
+from src.JuegoAhorcado import JuegoAhorcado, Estado
+from src.Letra import Letra
+from src.Palabra import Palabra
 
 @pytest.fixture
 def juego():
