@@ -8,14 +8,14 @@ class Letra:
         Crea una nueva letra a partir de un carácter dado.
         :param p_letra: Variable de tipo str que representa un carácter para inicializar la letra.
         """
-        pass
+        self.letra = p_letra
 
     def dar_letra(self) -> str:
         """
         Devuelve el carácter que representa la letra.
         :return: Un carácter con la letra.
         """
-        pass
+        return self.letra
 
     def es_igual(self, otra_letra: 'Letra') -> bool:
         """
@@ -23,4 +23,4 @@ class Letra:
         :param otra_letra: La letra para comparar.
         :return: True si las letras son iguales sin importar mayúsculas/minúsculas, False de lo contrario.
         """
-        pass
+        return self.letra.lower() == otra_letra.dar_letra().lower()
