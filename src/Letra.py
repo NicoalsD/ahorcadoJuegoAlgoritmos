@@ -23,4 +23,4 @@ class Letra:
         :param otra_letra: La letra para comparar.
         :return: True si las letras son iguales sin importar mayúsculas/minúsculas, False de lo contrario.
         """
-        return self.letra.lower() == otra_letra.dar_letra().lower()
+        return self.letra.lower() == otra_letra.dar_letra().lower() #  El lower() convierte la letra a minúscula para la comparación
