@@ -22,69 +22,69 @@ class HangmanDrawing(QWidget):
         self.setMinimumSize(200, 250)
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.setStyleSheet("""
-            background-color: white; 
-            border: 2px solid #BDC3C7;
-            border-radius: 10px;
-            margin: 5px;
+            background-color: white;
+            border: 2px solid red;
         """)
+
     
     def set_intentos_fallidos(self, intentos):
-        self.intentos_fallidos = max(0, min(intentos, 6))
-        self.update()
+        self.intentos_fallidos = max(0, min(intentos, 6))  # límite 6
+        self.update()  # redibuja el widget
+
     
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
-        
-        # Configurar el pincel - escalable
+    
         pen_width = max(2, self.width() // 60)
         pen = QPen(QColor(50, 50, 50), pen_width)
         painter.setPen(pen)
-        
-        # Dimensiones escalables
+    
         w = self.width()
         h = self.height()
-        margin = w * 0.1
-        
-        # Calcular posiciones escalables
+        margin = 20
+    
+        # Coordenadas base
         base_y = h - margin
-        base_left = margin
-        base_right = w - margin
-        post_x = w * 0.3
-        post_top = margin
-        beam_right = w * 0.7
-        rope_y = margin + (h * 0.15)
-        head_center_x = beam_right
-        head_center_y = rope_y + (h * 0.1)
-        head_radius = min(w, h) * 0.08
-        
-        # Base de la horca
+        post_x = margin * 2
+        top_y = margin
+        beam_x = w // 2
+        rope_y = top_y + 30
+    
+        # Fase 1: Base
         if self.intentos_fallidos >= 1:
-            painter.drawLine(int(base_left), int(base_y), int(base_right), int(base_y))
-        
-        # Poste vertical
+            painter.drawLine(margin, base_y, w - margin, base_y)
+    
+        # Fase 2: Poste + cuerda
         if self.intentos_fallidos >= 2:
-            painter.drawLine(int(post_x), int(base_y), int(post_x), int(post_top))
-        
-        # Poste horizontal
+            painter.drawLine(post_x, base_y, post_x, top_y)  # poste vertical
+            painter.drawLine(post_x, top_y, beam_x, top_y)  # poste horizontal
+            painter.drawLine(beam_x, top_y, beam_x, rope_y)  # cuerda
+    
+        # Fase 3: Cabeza
         if self.intentos_fallidos >= 3:
-            painter.drawLine(int(post_x), int(post_top), int(beam_right), int(post_top))
-        
-        # Cuerda
+            r = 20  # radio cabeza
+            painter.drawEllipse(beam_x - r, rope_y, 2 * r, 2 * r)
+    
+        # Fase 4: Cuerpo
         if self.intentos_fallidos >= 4:
-            painter.drawLine(int(beam_right), int(post_top), int(beam_right), int(rope_y))
-        
-        # Cabeza
+            body_top = rope_y + 2 * 20
+            body_bottom = body_top + 50
+            painter.drawLine(beam_x, body_top, beam_x, body_bottom)
+    
+        # Fase 5: Piernas
         if self.intentos_fallidos >= 5:
-            painter.drawEllipse(int(head_center_x - head_radius), int(head_center_y), 
-                              int(head_radius * 2), int(head_radius * 2))
-        
-        # Cuerpo
+            leg_start = rope_y + 2 * 20 + 50
+            painter.drawLine(beam_x, leg_start, beam_x - 20, leg_start + 30)
+            painter.drawLine(beam_x, leg_start, beam_x + 20, leg_start + 30)
+    
+        # Fase 6: Brazos
         if self.intentos_fallidos >= 6:
-            body_start_y = head_center_y + (head_radius * 2)
-            body_end_y = base_y - margin
-            painter.drawLine(int(head_center_x), int(body_start_y), 
-                           int(head_center_x), int(body_end_y))
+            arm_y = rope_y + 2 * 20 + 20
+            painter.drawLine(beam_x, arm_y, beam_x - 25, arm_y - 15)
+            painter.drawLine(beam_x, arm_y, beam_x + 25, arm_y - 15)
+
+
 
 class ResponsiveWordLabel(QLabel):
     """Label que se adapta automáticamente al tamaño de la palabra"""
