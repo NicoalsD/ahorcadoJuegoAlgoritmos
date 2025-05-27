@@ -30,7 +30,7 @@ class Palabra:
                 return False
         return True
 
-    def _buscar_letra_en_lista(self, p_letra: Letra, lista_letras: List[Letra]) -> bool:
+    def buscar_letra_en_lista(self, p_letra: Letra, lista_letras: List[Letra]) -> bool:
         """
         Indica si una letra se encuentra en una lista dada.
         :param p_letra: Letra que se está buscando.
