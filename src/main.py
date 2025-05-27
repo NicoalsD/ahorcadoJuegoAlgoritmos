@@ -1,3 +1,8 @@
+__author__ = "Nicolas Alejandro Diaz Acosta"
+__license__ = "GPL"
+__version__ = "1.0.0"
+__email__ = "nicolas.diazacost@campusucc.edu.co"
+
 from src.JuegoAhorcado import JuegoAhorcado, Estado
 from src.Letra import Letra
 
